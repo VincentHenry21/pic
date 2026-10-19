@@ -216,6 +216,16 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
 .send-err p{color:#ff7b7b;font-weight:600;}
 .backendrow{display:flex;gap:8px;}
 .backendrow input{flex:1;min-width:0;}
+/* ---------- svg icons ---------- */
+.ic{vertical-align:-3px;flex:0 0 auto;}
+button .ic{margin-right:4px;}
+.pill .ic{margin-right:2px;}
+.tabbar .ti .ic{width:22px;height:22px;vertical-align:middle;}
+.novid .big-ic .ic{width:44px;height:44px;color:#fff;}
+.send-art{display:grid;place-items:center;}
+.send-art .ic{width:48px;height:48px;color:#fff;}
+.stk svg{width:36px;height:36px;display:block;}
+button.stk{padding:0;}
 .footer{text-align:center;padding:26px;color:var(--ink-dim);font-size:12px;letter-spacing:2px;}
 .kbd{font-size:11px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 6px;}
 </style>
@@ -232,7 +242,7 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
     </div>
     <div>PIC<small>RETRO BOOTH</small></div>
   </div>
-  <button class="iconbtn" id="themeBtn" title="Toggle dark / light" aria-label="Toggle dark or light mode" aria-pressed="false">🌙</button>
+  <button class="iconbtn" id="themeBtn" title="Toggle dark / light" aria-label="Toggle dark or light mode" aria-pressed="false"></button>
 </header>
 
 <main class="shell wizard" id="wizard">
@@ -244,16 +254,16 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
       <video id="video" playsinline autoplay muted aria-label="Live camera preview"></video>
       <div id="countdown" aria-hidden="false"><span id="countNum" role="status" aria-live="assertive" aria-label="Countdown">3</span></div>
       <div class="novid" id="noCam">
-        <div style="font-size:44px">📷</div>
+        <div class="big-ic" data-ic="camera" data-sz="44" aria-hidden="true"></div>
         <div><b>Camera unavailable</b><br><span style="font-size:13px;opacity:.8">Permission denied or no camera found.<br>Upload photos instead, it works the same.</span></div>
-        <button class="pill" id="uploadBtn2">📤 Upload photos</button>
+        <button class="pill" id="uploadBtn2"><span data-ic="upload" aria-hidden="true"></span> Upload photos</button>
       </div>
     </div>
     <div class="camctl">
-      <button class="pill" id="startCamBtn">▶ Start camera</button>
-      <button class="pill" id="mirrorBtn" aria-pressed="true">🪞 Mirror: on</button>
-      <button class="pill" id="flipBtn" aria-pressed="false">🔄 Front cam</button>
-      <button class="pill" id="uploadBtn">📤 Upload photos</button>
+      <button class="pill" id="startCamBtn"><span data-ic="play" aria-hidden="true"></span> Start camera</button>
+      <button class="pill" id="mirrorBtn" aria-pressed="true"><span data-ic="mirror" aria-hidden="true"></span> Mirror: on</button>
+      <button class="pill" id="flipBtn" aria-pressed="false"><span data-ic="refresh" aria-hidden="true"></span> Front cam</button>
+      <button class="pill" id="uploadBtn"><span data-ic="upload" aria-hidden="true"></span> Upload photos</button>
     </div>
     <label class="lbl">FILTER</label>
     <div class="filters" id="filterRow" role="group" aria-label="Photo filters"></div>
@@ -267,7 +277,7 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
     </div>
     <label class="lbl" id="slotLbl">CAPTURED PHOTOS · tap a filled slot to retake it</label>
     <div class="slots" id="slots" role="group" aria-labelledby="slotLbl"></div>
-    <button class="bigbtn" id="captureBtn">📸 START PHOTO SEQUENCE</button>
+    <button class="bigbtn" id="captureBtn"><span data-ic="camera" aria-hidden="true"></span> START PHOTO SEQUENCE</button>
     <button class="bigbtn ghost" id="singleBtn">Take single photo</button>
     <input type="file" id="fileInput" class="hiddenfile" accept="image/*" multiple aria-label="Upload photos">
   </section>
@@ -292,10 +302,10 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
       <button class="pill" data-f="color:#d7dae0">Y2K Silver</button>
     </div>
     <div class="opt-row" id="patRow">
-      <button class="pill" data-f="pat:checker">▦ Checkerboard</button>
-      <button class="pill" data-f="pat:dots">⚫ Polka Dots</button>
-      <button class="pill" data-f="pat:sunset">🌅 Sunset</button>
-      <button class="pill" data-f="pat:film">🎞 Film Strip</button>
+      <button class="pill" data-f="pat:checker">Checkerboard</button>
+      <button class="pill" data-f="pat:dots">Polka Dots</button>
+      <button class="pill" data-f="pat:sunset">Sunset</button>
+      <button class="pill" data-f="pat:film">Film Strip</button>
     </div>
     <label class="lbl" for="borderRange">BORDER THICKNESS · <span id="borderVal">12</span>px</label>
     <input type="range" id="borderRange" min="0" max="40" value="12" aria-label="Border thickness in pixels">
@@ -338,7 +348,7 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
     <label class="lbl" id="stkLbl">TAP TO ADD · DRAG ON STRIP TO MOVE · DOUBLE-TAP STICKER TO REMOVE</label>
     <div class="stickers" id="stickerRow" role="group" aria-labelledby="stkLbl"></div>
     <div class="rowline">
-      <button class="pill" id="clearStkBtn">Clear stickers</button>
+      <button class="pill" id="clearStkBtn"><span data-ic="trash" aria-hidden="true"></span> Clear stickers</button>
     </div>
     <div class="rowline">
       <div class="grow"><label class="lbl" for="stkSize" style="margin:0">STICKER SIZE</label></div>
@@ -351,8 +361,8 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
         <div class="grow" style="text-align:left;font-size:13px;font-weight:700">Frame speed · <span id="gifSpeedVal">500</span>ms</div>
       </div>
       <input type="range" id="gifSpeed" min="200" max="1000" step="50" value="500" aria-label="GIF frame speed in milliseconds">
-      <button class="bigbtn ghost" id="gifBtn" style="margin-top:6px">🎞 Generate GIF</button>
-      <button class="bigbtn" id="gifDlBtn" style="display:none;margin-top:8px">⬇ Download GIF</button>
+      <button class="bigbtn ghost" id="gifBtn" style="margin-top:6px"><span data-ic="film" aria-hidden="true"></span> Generate GIF</button>
+      <button class="bigbtn" id="gifDlBtn" style="display:none;margin-top:8px"><span data-ic="download" aria-hidden="true"></span> Download GIF</button>
     </div>
   </section>
 
@@ -361,10 +371,10 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
     <h2>05 · PREVIEW &amp; SHARE</h2>
     <div class="preview"><canvas id="stripCanvas" role="img" aria-label="Photo strip preview. Added stickers can be dragged with a pointer."></canvas></div>
     <div class="sharebtns">
-      <button class="bigbtn" id="dlBtn" style="margin-top:0">⬇ Save PNG</button>
-      <button class="bigbtn ghost" id="shareBtn" style="margin-top:0">📤 Share</button>
-      <button class="bigbtn ghost" id="qrBtn" style="margin-top:0">📱 Send to phone</button>
-      <button class="bigbtn ghost" id="copyBtn" style="margin-top:0">📋 Copy image</button>
+      <button class="bigbtn" id="dlBtn" style="margin-top:0"><span data-ic="download" aria-hidden="true"></span> Save PNG</button>
+      <button class="bigbtn ghost" id="shareBtn" style="margin-top:0"><span data-ic="share" aria-hidden="true"></span> Share</button>
+      <button class="bigbtn ghost" id="qrBtn" style="margin-top:0"><span data-ic="phone" aria-hidden="true"></span> Send to phone</button>
+      <button class="bigbtn ghost" id="copyBtn" style="margin-top:0"><span data-ic="copy" aria-hidden="true"></span> Copy image</button>
     </div>
     <label class="lbl" for="backendInput">BACKEND URL · powers Send to phone</label>
     <div class="backendrow">
@@ -376,25 +386,25 @@ html[data-theme="light"] .linktxt{color:#5a3fd4;}
 </main>
 
 <nav class="tabbar" id="tabbar" role="tablist" aria-label="Photobooth steps">
-  <button data-s="cam" class="on" role="tab" aria-selected="true" aria-controls="step-cam" id="tab-cam"><span class="ti" aria-hidden="true">📷</span>Camera</button>
-  <button data-s="layout" role="tab" aria-selected="false" aria-controls="step-layout" id="tab-layout"><span class="ti" aria-hidden="true">🖼</span>Layout</button>
-  <button data-s="style" role="tab" aria-selected="false" aria-controls="step-style" id="tab-style"><span class="ti" aria-hidden="true">✏️</span>Style</button>
-  <button data-s="stickers" role="tab" aria-selected="false" aria-controls="step-stickers" id="tab-stickers"><span class="ti" aria-hidden="true">✨</span>Stickers</button>
-  <button data-s="share" role="tab" aria-selected="false" aria-controls="step-share" id="tab-share"><span class="ti" aria-hidden="true">📤</span>Share</button>
+  <button data-s="cam" class="on" role="tab" aria-selected="true" aria-controls="step-cam" id="tab-cam"><span class="ti" data-ic="camera" data-sz="22" aria-hidden="true"></span>Camera</button>
+  <button data-s="layout" role="tab" aria-selected="false" aria-controls="step-layout" id="tab-layout"><span class="ti" data-ic="grid" data-sz="22" aria-hidden="true"></span>Layout</button>
+  <button data-s="style" role="tab" aria-selected="false" aria-controls="step-style" id="tab-style"><span class="ti" data-ic="pen" data-sz="22" aria-hidden="true"></span>Style</button>
+  <button data-s="stickers" role="tab" aria-selected="false" aria-controls="step-stickers" id="tab-stickers"><span class="ti" data-ic="sparkles" data-sz="22" aria-hidden="true"></span>Stickers</button>
+  <button data-s="share" role="tab" aria-selected="false" aria-controls="step-share" id="tab-share"><span class="ti" data-ic="send" data-sz="22" aria-hidden="true"></span>Share</button>
 </nav>
 
 <!-- SEND TO PHONE MODAL -->
 <div class="modal" id="sendModal" role="dialog" aria-modal="true" aria-labelledby="sendTitle">
   <div class="mbox sendbox">
     <button class="close-x" id="sendClose" aria-label="Close send to phone dialog">✕</button>
-    <div class="send-art" aria-hidden="true">📲</div>
+    <div class="send-art" data-ic="phone" data-sz="48" aria-hidden="true"></div>
     <h3 id="sendTitle">Send to phone</h3>
     <p class="send-sub" id="sendSub" role="status">Preparing your strip...</p>
     <div class="progress" id="sendProg" aria-hidden="true"><div></div></div>
     <div class="send-done" id="sendDone" hidden>
       <div class="linkcard">
         <span class="linktxt" id="sendLink"></span>
-        <button class="pill" id="sendCopy">Copy link</button>
+        <button class="pill" id="sendCopy"><span data-ic="link" aria-hidden="true"></span> Copy link</button>
       </div>
       <div class="mrow">
         <a class="bigbtn" id="sendOpen" target="_blank" rel="noopener" style="flex:1;text-align:center;text-decoration:none;display:block">Open link</a>
@@ -429,6 +439,30 @@ function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");cle
 function load(k,d){try{const v=localStorage.getItem("pic:"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}}
 function save(k,v){try{localStorage.setItem("pic:"+k,JSON.stringify(v));}catch(e){}}
 
+/* ================= SVG ICONS (designed, no emoji) ================= */
+const ICONS={
+camera:'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
+download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+mirror:'<path d="m3 7 5 5-5 5V7"/><path d="m21 7-5 5 5 5V7"/><path d="M12 20v2"/><path d="M12 14v2"/><path d="M12 8v2"/><path d="M12 2v2"/>',
+refresh:'<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/>',
+share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
+phone:'<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/>',
+copy:'<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+grid:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+pen:'<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>',
+sparkles:'<path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3L12 3z"/>',
+send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+moon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
+trash:'<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+film:'<rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>',
+link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+play:'<polygon points="5 3 19 12 5 21 5 3"/>'
+};
+function ic(n,s){s=s||18;return '<svg class="ic" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ICONS[n]+'</svg>';}
+document.querySelectorAll("[data-ic]").forEach(el=>{el.innerHTML=ic(el.dataset.ic,+(el.dataset.sz||18));});
+
 /* ================= STATE ================= */
 const S={
   stream:null,facing:"user",mirror:true,filter:"normal",
@@ -452,11 +486,28 @@ const FONTS={
   serif:'700 {s}px Georgia,"Times New Roman",serif',
   hand:'700 {s}px "Comic Sans MS","Chalkboard SE","Segoe Print",cursive'
 };
-const EMOJIS=["✨","❤️","🎀","🕶️","⭐","📸","🔥","💋","🌈","👾","🍒","💜"];
+const SVGOPEN='<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">';
+const STICKERS=[
+{name:"star",label:"star",svg:SVGOPEN+'<polygon points="32,6 39.5,24 59,24.5 43.5,36.5 49,55 32,44 15,55 20.5,36.5 5,24.5 24.5,24" fill="#FFD166" stroke="#E8930C" stroke-width="3" stroke-linejoin="round"/></svg>'},
+{name:"heart",label:"heart",svg:SVGOPEN+'<path d="M32 54C20 44 8 35 8 23c0-7 5-12 12-12 5 0 9 3 12 7 3-4 7-7 12-7 7 0 12 5 12 12 0 12-12 21-24 31z" fill="#FF4D6D" stroke="#C9184A" stroke-width="3" stroke-linejoin="round"/></svg>'},
+{name:"bow",label:"bow",svg:SVGOPEN+'<path d="M30 30 L8 18 Q4 34 10 46 L30 34 Z" fill="#FF8FAB" stroke="#C9184A" stroke-width="3" stroke-linejoin="round"/><path d="M34 30 L56 18 Q60 34 54 46 L34 34 Z" fill="#FF8FAB" stroke="#C9184A" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="32" r="7" fill="#FF4D6D" stroke="#C9184A" stroke-width="3"/></svg>'},
+{name:"shades",label:"sunglasses",svg:SVGOPEN+'<rect x="6" y="22" width="22" height="18" rx="8" fill="#21212B"/><rect x="36" y="22" width="22" height="18" rx="8" fill="#21212B"/><rect x="27" y="26" width="10" height="5" fill="#21212B"/><rect x="1" y="24" width="7" height="4" rx="2" fill="#21212B"/><rect x="56" y="24" width="7" height="4" rx="2" fill="#21212B"/><path d="M10 28 L22 28" stroke="#5A5A72" stroke-width="3" stroke-linecap="round"/><path d="M42 28 L54 28" stroke="#5A5A72" stroke-width="3" stroke-linecap="round"/></svg>'},
+{name:"sparkle",label:"sparkle",svg:SVGOPEN+'<path d="M32 4 C34 22 42 30 60 32 C42 34 34 42 32 60 C30 42 22 34 4 32 C22 30 30 22 32 4 Z" fill="#FFE66D" stroke="#E8930C" stroke-width="3" stroke-linejoin="round"/></svg>'},
+{name:"camera",label:"camera",svg:SVGOPEN+'<rect x="8" y="18" width="48" height="34" rx="8" fill="#7C5CFF" stroke="#4A32B8" stroke-width="3"/><circle cx="32" cy="35" r="10" fill="#1B1B26" stroke="#EDEAFF" stroke-width="3"/><circle cx="32" cy="35" r="4" fill="#7C9CFF"/><rect x="24" y="10" width="16" height="8" rx="3" fill="#4A32B8"/><circle cx="50" cy="26" r="3" fill="#FFE66D"/></svg>'},
+{name:"flame",label:"flame",svg:SVGOPEN+'<path d="M32 58c10 0 18-8 18-18 0-8-5-13-9-17-2 3-4 5-7 6 1-7-1-15-6-21-1 8-8 12-10 20-1 4-2 7-2 12 0 10 6 18 16 18z" fill="#FF9F43" stroke="#E25822" stroke-width="3" stroke-linejoin="round"/><path d="M32 58c5 0 9-4 9-9 0-4-2-7-5-9-1 2-2 3-4 3 1-4 0-8-2-11-3 4-7 7-7 13 0 7 4 13 9 13z" fill="#FFD166"/></svg>'},
+{name:"cherry",label:"cherries",svg:SVGOPEN+'<path d="M40 8 C36 20 30 30 24 38" stroke="#3E7C4F" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M40 8 C46 18 48 26 46 34" stroke="#3E7C4F" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M40 8 q10 -6 18 -2 q-8 8 -18 2z" fill="#6ABF7B" stroke="#3E7C4F" stroke-width="2"/><circle cx="22" cy="46" r="11" fill="#E5383B" stroke="#A4161A" stroke-width="3"/><circle cx="46" cy="44" r="11" fill="#E5383B" stroke="#A4161A" stroke-width="3"/><circle cx="18" cy="42" r="3" fill="#FF8FAB"/></svg>'},
+{name:"rainbow",label:"rainbow",svg:SVGOPEN+'<path d="M8 48 a24 24 0 0 1 48 0" fill="none" stroke="#FF5964" stroke-width="7"/><path d="M15 48 a17 17 0 0 1 34 0" fill="none" stroke="#FFD166" stroke-width="7"/><path d="M22 48 a10 10 0 0 1 20 0" fill="none" stroke="#38618C" stroke-width="7"/><circle cx="10" cy="48" r="6" fill="#ffffff" stroke="#D8D8E8" stroke-width="2"/><circle cx="54" cy="48" r="6" fill="#ffffff" stroke="#D8D8E8" stroke-width="2"/></svg>'},
+{name:"bolt",label:"lightning bolt",svg:SVGOPEN+'<polygon points="36,4 14,36 28,36 26,60 50,26 36,26" fill="#FFE66D" stroke="#E8930C" stroke-width="3" stroke-linejoin="round"/></svg>'},
+{name:"ghost",label:"ghost",svg:SVGOPEN+'<path d="M18 56 V30 a14 14 0 0 1 28 0 V56 l-6-5-4 5-4-5-4 5-4-5z" fill="#B388EB" stroke="#6A4FB8" stroke-width="3" stroke-linejoin="round"/><circle cx="26" cy="30" r="3.5" fill="#241F3A"/><circle cx="38" cy="30" r="3.5" fill="#241F3A"/></svg>'},
+{name:"kiss",label:"kiss",svg:SVGOPEN+'<path d="M8 30 Q18 18 32 26 Q46 18 56 30 Q46 46 32 40 Q18 46 8 30 Z" fill="#FF4D6D" stroke="#C9184A" stroke-width="3" stroke-linejoin="round"/><path d="M10 30 Q32 34 54 30" stroke="#C9184A" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>'}
+];
+const stickerImgs={};
+STICKERS.forEach(s=>{const img=new Image();img.alt=s.label;
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(s.svg);stickerImgs[s.name]=img;});
 
 /* ================= THEME ================= */
 function syncPressed(root){root.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.classList.contains("on")?"true":"false"));}
-function applyTheme(){document.documentElement.dataset.theme=S.theme;$("themeBtn").textContent=S.theme==="dark"?"🌙":"☀️";$("themeBtn").setAttribute("aria-pressed",S.theme==="dark"?"true":"false");save("theme",S.theme);}
+function applyTheme(){document.documentElement.dataset.theme=S.theme;$("themeBtn").innerHTML=ic(S.theme==="dark"?"moon":"sun",20);$("themeBtn").setAttribute("aria-pressed",S.theme==="dark"?"true":"false");save("theme",S.theme);}
 $("themeBtn").onclick=()=>{S.theme=S.theme==="dark"?"light":"dark";applyTheme();};
 applyTheme();
 
@@ -490,8 +541,12 @@ async function startCam(){
 }
 function stopCam(){if(S.stream){S.stream.getTracks().forEach(t=>t.stop());S.stream=null;}}
 $("startCamBtn").onclick=startCam;
-$("mirrorBtn").onclick=e=>{S.mirror=!S.mirror;video.classList.toggle("nomirror",!S.mirror);e.target.textContent="🪞 Mirror: "+(S.mirror?"on":"off");e.target.setAttribute("aria-pressed",S.mirror?"true":"false");};
-$("flipBtn").onclick=e=>{S.facing=S.facing==="user"?"environment":"user";e.target.textContent=S.facing==="user"?"🔄 Front cam":"🔄 Rear cam";e.target.setAttribute("aria-pressed",S.facing==="user"?"false":"true");if(S.stream)startCam();};
+$("mirrorBtn").onclick=()=>{S.mirror=!S.mirror;video.classList.toggle("nomirror",!S.mirror);
+  $("mirrorBtn").innerHTML=ic("mirror",18)+" Mirror: "+(S.mirror?"on":"off");
+  $("mirrorBtn").setAttribute("aria-pressed",S.mirror?"true":"false");};
+$("flipBtn").onclick=()=>{S.facing=S.facing==="user"?"environment":"user";
+  $("flipBtn").innerHTML=ic("refresh",18)+(S.facing==="user"?" Front cam":" Rear cam");
+  $("flipBtn").setAttribute("aria-pressed",S.facing==="user"?"false":"true");if(S.stream)startCam();};
 function applyFilterCSS(){video.style.filter=FILTERS[S.filter].css;}
 const fr=$("filterRow");
 Object.keys(FILTERS).forEach(k=>{
@@ -664,9 +719,12 @@ function renderStrip(){
   x.restore();
   /* stickers */
   S.stickers.forEach(st=>{
+    const img=stickerImgs[st.n];
+    if(!img)return;
+    const s=st.s||64;
     x.save();x.translate(st.x*W,st.y*H);x.rotate(st.r||0);
-    x.font=st.s+"px serif";x.textAlign="center";x.textBaseline="middle";
-    x.fillText(st.e,0,0);x.restore();
+    try{x.drawImage(img,-s/2,-s/2,s,s);}catch(e){}
+    x.restore();
   });
 }
 function placeholder(i){
@@ -703,10 +761,11 @@ $("soundToggle").onchange=e=>{S.sound=e.target.checked;};
 
 /* stickers */
 const sr=$("stickerRow");
-EMOJIS.forEach(em=>{
-  const d=document.createElement("div");d.className="stk";d.textContent=em;
-  d.tabIndex=0;d.setAttribute("role","button");d.setAttribute("aria-label","Add "+em+" sticker to strip");
-  const add=()=>{S.stickers.push({e:em,x:.5,y:.5,s:S.stkSize,r:(Math.random()-.5)*.5});renderStrip();toast("Sticker added, drag to move");};
+STICKERS.forEach(s=>{
+  const d=document.createElement("button");d.className="stk";d.type="button";
+  d.innerHTML=s.svg;
+  d.setAttribute("aria-label","Add "+s.label+" sticker to strip");
+  const add=()=>{S.stickers.push({n:s.name,x:.5,y:.5,s:S.stkSize,r:(Math.random()-.5)*.5});renderStrip();toast("Sticker added, drag to move");};
   d.onclick=add;
   d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();add();}};
   sr.appendChild(d);
